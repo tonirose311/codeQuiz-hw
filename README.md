@@ -10,6 +10,28 @@ container
 display timer
 
 
+addEventListener("click")
+
+ if === answer
+  display correct!
+ else if !== answer
+  display wrong
+
+repeat for every question (create questions array and for loop to cycle through questions instead of repeating code)
+
+
+
+local storage for highscores
+
+
+
+
+
+
+
+
+
+
 
 q1. who are you?
     -I am groot
