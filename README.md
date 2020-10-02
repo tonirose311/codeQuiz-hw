@@ -49,10 +49,10 @@ q3. What is the answer to life, the universe, and everything?
     -unicorns
     -42 
 
-q4. Which chain restaurant has the most locations around the world?
-    -I am groot (Subway)
-    -McDonalds
-    -subway
+q4. What is the powerhouse of the cell?
+    -I am groot (mitochondria)
+    -Golgi apparatus
+    -mitochondria
 
 
 q5. what is the most important lesson you learned today?
