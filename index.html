@@ -9,22 +9,22 @@
 
 
 <body>
-    <h1>Let's Get Quizzing</h1>
+    <h1>Let's Get Quizzing Star Lord =]</h1>
     <!-- creating basic structure for question and answer to go in -->
     <div class="container col-sm-12 col-md-6">
         <div class="card">
-            <h2 class ="questions">-----Question-----</h2>
-        <div class="card buttons">
-            <button type="button" id="btn1" class="btn btn-primary btn-md btn-block choice">Answer</button>
-            <button type="button" id="btn2" class="btn btn-primary btn-md btn-block choice">Answer</button>
-            <button type="button" id="btn3" class="btn btn-primary btn-md btn-block choice">Answer</button>
-            <button type="button" id="btn4" class="btn btn-primary btn-md btn-block choice">Answer</button>
-        </div>
-
-        <footer>
-            <p>Question x of y</p>
-        </footer>
-
+            <div id="quiz">
+                <p id="questions"></p>
+                    <div class="card buttons">
+                        <button type="button" id="btn0" class="btn btn-primary btn-md btn-block choice"><span id="choice0"></span></button>
+                        <button type="button" id="btn1" class="btn btn-primary btn-md btn-block choice"><span id="choice1"></span></button>
+                        <button type="button" id="btn2" class="btn btn-primary btn-md btn-block choice"><span id="choice2"></span></button>
+                        <button type="button" id="btn3" class="btn btn-primary btn-md btn-block choice"><span id="choice3"></span></button>
+                    </div>
+            </div>
+                <footer>
+                    <p id="progress">Question x of y</p>
+                </footer>
         </div>
     </div>
 
@@ -35,3 +35,40 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
+<!-- <!DOCTYPE html> -->
+    <!-- code by webdevtrick (https://webdevtrick.com) -->
+<!-- <html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="grid">
+        <div id="quiz">
+            <h1>Quiz in JavaScript  Webdevtrick.com</h1>
+            <hr style="margin-bottom: 20px">
+
+            <p id="question"></p>
+
+            <div class="buttons">
+                <button id="btn0"><span id="choice0"></span></button>
+                <button id="btn1"><span id="choice1"></span></button>
+                <button id="btn2"><span id="choice2"></span></button>
+                <button id="btn3"><span id="choice3"></span></button>
+            </div>
+
+            <hr style="margin-top: 50px">
+            <footer>
+                <p id="progress">Question x of y</p>
+            </footer>
+        </div>
+    </div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html> -->
