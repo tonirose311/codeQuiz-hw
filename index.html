@@ -1,74 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Code Quiz</title>
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
-
 <body>
-    <h1>Let's Get Quizzing Star Lord =]</h1>
-    <!-- creating basic structure for question and answer to go in -->
-    <div class="container col-sm-12 col-md-6">
-        <div class="card">
-            <div id="quiz">
-                <p id="questions"></p>
-                    <div class="card buttons">
-                        <button type="button" id="btn0" class="btn btn-primary btn-md btn-block choice"><span id="choice0"></span></button>
-                        <button type="button" id="btn1" class="btn btn-primary btn-md btn-block choice"><span id="choice1"></span></button>
-                        <button type="button" id="btn2" class="btn btn-primary btn-md btn-block choice"><span id="choice2"></span></button>
-                        <button type="button" id="btn3" class="btn btn-primary btn-md btn-block choice"><span id="choice3"></span></button>
-                    </div>
-            </div>
-                <footer>
-                    <p id="progress">Question x of y</p>
-                </footer>
+
+    <div class="main-container">
+
+        <div class="scores-link">
+            <a class="btn" href="scores.html">See latest scores</a>
         </div>
+
+        <div class="quiz-start">
+            <p class="quiz-instructions">
+                Let's get Quizzing Star Lord!
+            </p>
+            <button class="btn quiz-start-btn">Start Quiz</button>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-timer">
+                <p class="timer"></p>
+                <div class="progress-bar-wrap">
+                    <p class="progress-bar"></p>
+                </div>
+            </div>
+
+            <h1>Code Quiz</h1>
+            <h2 class="quiz-question">Demo Question</h2>
+            <ul>
+                <li>
+                    <label class="checkbox">
+                        <input type="checkbox"><span id="answer1" class="answers" data-value="1">demo answers</span>
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                        <input type="checkbox"><span id="answer2" class="answers" data-value="2">demo answers</span>
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                        <input type="checkbox"><span id="answer3" class="answers" data-value="3">demo answers</span>
+                    </label>
+                </li>
+                <li>
+                    <label class="checkbox">
+                        <input type="checkbox"><span id="answer4" class="answers" data-value="4">demo answers</span>
+                    </label>
+                </li>
+            </ul>
+
+            <!-- <button class="btn next-question">Next Question</button> -->
+
+            <p class="feedback"></p>
+        </div>
+
+        <div class="quiz-score-container">
+            <p class="quiz-score"></p>
+            <button class="btn restart-btn">Retake Quiz</button>
+        </div>
+
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
-
-
-<!-- <!DOCTYPE html> -->
-    <!-- code by webdevtrick (https://webdevtrick.com) -->
-<!-- <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Quiz</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-    <div class="grid">
-        <div id="quiz">
-            <h1>Quiz in JavaScript  Webdevtrick.com</h1>
-            <hr style="margin-bottom: 20px">
-
-            <p id="question"></p>
-
-            <div class="buttons">
-                <button id="btn0"><span id="choice0"></span></button>
-                <button id="btn1"><span id="choice1"></span></button>
-                <button id="btn2"><span id="choice2"></span></button>
-                <button id="btn3"><span id="choice3"></span></button>
-            </div>
-
-            <hr style="margin-top: 50px">
-            <footer>
-                <p id="progress">Question x of y</p>
-            </footer>
-        </div>
-    </div>
-
-
-<script src="script.js"></script>
-
-</body>
-</html> -->
