@@ -124,7 +124,7 @@ function shuffleQuestions() {
     })
 }
 
-shuffleQuestions();
+// shuffleQuestions();
 
 questionHeading.textContent = quizQuestions[questionIndex].question;
 answerElement1.textContent = quizQuestions[questionIndex].choice1;
