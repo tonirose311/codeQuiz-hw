@@ -14,7 +14,6 @@ let restartQuizBtn = document.querySelector('.restart-btn');
 let scoresContainer = document.querySelector('.scores-list')
 let scoresLinkContainer = document.querySelector('.scores-link');
 
-// Answer choices Elements
 let answerElement1 = document.querySelector('#answer1');
 let answerElement2 = document.querySelector('#answer2');
 let answerElement3 = document.querySelector('#answer3');
@@ -70,7 +69,6 @@ let TIMER;
 let score = 0;
 let initials;
 
-// Setting up the data that will get saved to local storage
 let records = [];
 let user = {};
 
@@ -124,8 +122,6 @@ function shuffleQuestions() {
     })
 }
 
-// shuffleQuestions();
-
 questionHeading.textContent = quizQuestions[questionIndex].question;
 answerElement1.textContent = quizQuestions[questionIndex].choice1;
 answerElement2.textContent = quizQuestions[questionIndex].choice2;
@@ -133,7 +129,6 @@ answerElement3.textContent = quizQuestions[questionIndex].choice3;
 answerElement4.textContent = quizQuestions[questionIndex].choice4;
 
 
-// Event Listeners
 quizStartBtn.addEventListener('click', startQuiz);
 restartQuizBtn.addEventListener('click', reStartQuiz);
 
