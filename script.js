@@ -1,94 +1,214 @@
-// // var questions = document.querySelector("questions")
-// // var answer = document.querySelector("choice")
+let questionHeading = document.querySelector('.quiz-question');
+let nextBtn = document.querySelector('.next-question');
+let quizStartBtn = document.querySelector('.quiz-start-btn');
+let quizStartContainer = document.querySelector('.quiz-start');
+let quiztContainer = document.querySelector('.quiz-container');
+let feedBack = document.querySelector('.feedback');
+let timerContainer = document.querySelector('.quiz-timer');
+let timer = document.querySelector('.timer');
+let progressBar = document.querySelector('.progress-bar');
+let quizScoreContainer = document.querySelector('.quiz-score-container');
+let quizScore = document.querySelector('.quiz-score');
+let checkBoxes = document.querySelectorAll('input[type=checkbox]');
+let restartQuizBtn = document.querySelector('.restart-btn');
+let scoresContainer = document.querySelector('.scores-list')
+let scoresLinkContainer = document.querySelector('.scores-link');
 
-//referencing webdevtrick's javascript code 
+// Answer choices Elements
+let answerElement1 = document.querySelector('#answer1');
+let answerElement2 = document.querySelector('#answer2');
+let answerElement3 = document.querySelector('#answer3');
+let answerElement4 = document.querySelector('#answer4');
 
-function play(questions) {
-    this.score = 0;
-    this.questions = questions;
-    this.questionIndex = 0;
-}
+const quizQuestions = [
+    {
+        question: "Who are you?",
+        choice1: "I am Groot",
+        choice2: "I am Star Lord",
+        choice3: "I am Rocket",
+        choice4: "I am Groot",
+        correctAnswer: "4"
+    },
+    {
+        question: "What is the acronym for the colors of the rainbow?",
+        choice1: "PEMDAS",
+        choice2: "I AM GROOT",
+        choice3: "ROY G BIV",
+        choice4: "UNICEF",
+        correctAnswer: "2"
+    },
+    {
+        question: "What is the answer to life, the universe, and everything?",
+        choice1: "Unicorns",
+        choice2: "42",
+        choice3: "I am Groot",
+        choice4: "Pizza",
+        correctAnswer: "3"
+    },
+    {
+        question: "What is the powerhouse of the cell?",
+        choice1: "Golgi Apparatus",
+        choice2: "Mitochondria",
+        choice3: "Cell Wall",
+        choice4: "I am Groot",
+        correctAnswer: "4"
+    },
+    {
+        question: "What is the most important lesson you learned today?",
+        choice1: "I am Groot",
+        choice2: "Mitochondria is the powerhouse of the cell",
+        choice3: "We are Groot",
+        choice4: "Yes",
+        correctAnswer: "3"
+    },
+]
 
-play.prototype.getQuestionIndex = function() {
-    return this.questions[this.questionIndex];
-}
+let questionIndex = 0;
+let timeLeft = 60;
+let width = 500;
+let TIMER;
+let score = 0;
+let initials;
 
-play.prototype.guess = function(answer) {
-    if(this.getQuestionIndex().isCorrectAnswer(answer)) {
-        this.score++;
-    }
+// Setting up the data that will get saved to local storage
+let records = [];
+let user = {};
 
-    this.questionIndex++;
-}
-
-play.prototype.isEnded = function() {
-    return this.questionIndex === this.questions.length;
-}
-
-
-function question(text, choices, answer) {
-    this.text = text;
-    this.choices = choices;
-    this.answer = answer;
-}
-
-question.prototype.isCorrectAnswer = function(choice) {
-    return this.answer === choice;
-}
-
-function populate() {
-    //"quiz" is not being defined as a function. same goes for the rest of the following occurrences
-    if(quiz.isEnded()) {
-        showScores();
-    }
-    else {
-//code is broken here for innerHTML
-        // question
-        var element = document.getElementById("question");
-        element.innerHTML = quiz.getQuestionIndex().text;
-
-        // choices
-        var choices = quiz.getQuestionIndex().choices;
-        for(var i = 0; i < choices.length; i++) {
-            var element = document.getElementById("choice" + i);
-            element.innerHTML = choices[i];
-            guess("btn" + i, choices[i]);
+function startTimer() {
+    TIMER = setInterval(() => {
+        timeLeft--;
+        timer.textContent = `You have ${timeLeft} seconds left.`;
+        progressBar.style.maxWidth = (timeLeft * 1017 / 100) + 'px';
+        if (timeLeft <= 0) {
+            stopTimer();
         }
+        for (checkbox of checkBoxes) {
+            if (questionIndex >= quizQuestions.length - 1 && checkbox.checked === true) {
+                stopTimer();
+            }
+        }
+    }, 1000)
+}
 
-        showProgress();
+function stopTimer() {
+    clearInterval(TIMER);
+    console.log('Times up!');
+    setScore();
+    quizScoreContainer.style.display = 'block';
+    quizScore.textContent = `You had ${score} of 5 correct.`
+}
+
+function setScore() {
+    initials = prompt('Quiz complete! Enter your initials to save your score.');
+    user.name = initials;
+    user.finalScore = score;
+    records.push(user);
+    console.log(records);
+    if (records && initials) {
+        localStorage.setItem('records', JSON.stringify(records));
     }
-};
+}
 
-function guess(id, guess) {
-    var button = document.getElementById(id);
-    button.onclick = function() {
-        quiz.guess(guess);
-        populate();
+function getScores() {
+    let recordCollection = JSON.parse(localStorage.getItem('records'));
+    if (recordCollection) {
+        for (let record of recordCollection) {
+            records.push(record);
+        }
     }
-};
+}
+
+function shuffleQuestions() {
+    quizQuestions.sort(function () {
+        return 0.5 - Math.random();
+    })
+}
+
+shuffleQuestions();
+
+questionHeading.textContent = quizQuestions[questionIndex].question;
+answerElement1.textContent = quizQuestions[questionIndex].choice1;
+answerElement2.textContent = quizQuestions[questionIndex].choice2;
+answerElement3.textContent = quizQuestions[questionIndex].choice3;
+answerElement4.textContent = quizQuestions[questionIndex].choice4;
 
 
-function showProgress() {
-    var currentQuestionNumber = quiz.questionIndex + 1;
-    var element = document.getElementById("progress");
-    element.innerHTML = "Question " + currentQuestionNumber + " of " + quiz.questions.length;
-};
+// Event Listeners
+quizStartBtn.addEventListener('click', startQuiz);
+restartQuizBtn.addEventListener('click', reStartQuiz);
 
-function showScores() {
-    var gameOverHTML = "<h1>Result</h1>";
-    gameOverHTML += "<h2 id='score'> Your scores: " + quiz.score + "</h2>";
-    var element = document.getElementById("quiz");
-    element.innerHTML = gameOverHTML;
-};
+function getNextQuestion() {
+    for (checkbox of checkBoxes) {
+        if (questionIndex < quizQuestions.length - 1 && checkbox.checked) {
+            questionIndex++;
+            resetQuestions();
+        }
+    }
 
-// create questions here
-var questions = [
-    new question("Who are you?", ["I am Groot", "I am Gamora","I am Star Lord", "I am Rocket"], "I am Groot"),
-    new question("What is the acronym for the colors of the rainbow?", ["PEMDAS", "I AM GROOT", "ROY G BIV", "UNICEF"], "I AM GROOT"),
-    new question("What is the answer to life, the universe, and everything?", ["Unicorns", "42","I am Groot", "Pizza"], "I am Groot"),
-    new question("What is the powerhouse of the cell?", ["Golgi Apparatus", "Mitochondria", "Cell Wall", "I am Groot"], "I am Groot"),
-    new question("What is the most important lesson you learned today?", ["I am Groot", "Mitochondria is the powerhouse of the cell", "We are Groot", "Yes"], "We are Groot")
-];
+    questionHeading.textContent = quizQuestions[questionIndex].question;
+    answerElement1.textContent = quizQuestions[questionIndex].choice1;
+    answerElement2.textContent = quizQuestions[questionIndex].choice2;
+    answerElement3.textContent = quizQuestions[questionIndex].choice3;
+    answerElement4.textContent = quizQuestions[questionIndex].choice4;
+}
 
-// broken here 
-populate();
+function startQuiz() {
+    startTimer();
+    disableCheckboxes();
+    checkAnswers();
+    getScores();
+    scoresLinkContainer.style.display = 'none';
+    quizStartContainer.style.display = 'none';
+    quiztContainer.style.display = 'block';
+    timerContainer.style.display = 'block';
+}
+
+function reStartQuiz() {
+    document.location.reload();
+}
+
+function resetQuestions() {
+    for (let checkbox of checkBoxes) {
+        checkbox.checked = false;
+        checkbox.disabled = false;
+        checkbox.nextSibling.style.opacity = '1';
+    }
+    feedBack.textContent = '';
+    feedBack.classList.remove('correct', 'wrong');
+}
+
+function disableCheckboxes() {
+    for (let checkbox of checkBoxes) {
+        checkbox.addEventListener('click', (e) => {
+            if (e.target.checked) {
+                for (let unchecked of checkBoxes) {
+                    if (!unchecked.checked) {
+                        unchecked.disabled = true;
+                        unchecked.nextSibling.style.opacity = '0.5';
+                    }
+                    checkbox.disabled = true;
+                }
+            }
+        })
+    }
+}
+
+function checkAnswers() {
+    for (i = 0; i < checkBoxes.length; i++) {
+        checkBoxes[i].addEventListener('click', (e) => {
+            if (e.target.nextSibling.dataset.value === quizQuestions[questionIndex].correctAnswer) {
+                score++;
+                feedBack.textContent = 'That is correct!';
+                feedBack.classList.add('correct');
+            } else {
+                console.log('Answer is wrong');
+                feedBack.classList.add('wrong');
+                feedBack.textContent = 'Wrong!';
+                timeLeft -= 10;
+            }
+            setTimeout(function () {
+                getNextQuestion();
+            }, 1000);
+        })
+    }
+} 
