@@ -22,7 +22,7 @@ let answerElement4 = document.querySelector('#answer4');
 const quizQuestions = [
     {
         question: "Who are you?",
-        choice1: "I am Groot",
+        choice1: "I am Gamora",
         choice2: "I am Star Lord",
         choice3: "I am Rocket",
         choice4: "I am Groot",
